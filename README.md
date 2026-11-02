@@ -22,12 +22,13 @@ Proyek portofolio data analyst kedua. Dataset yang sama dengan [proyek Python sa
 - Bulan tertinggi: Feb 2025 (Rp66,3 juta)
 - Lima kategori berselisih tipis, T-Shirt paling rendah (Rp195,6 juta, dihitung dari subtotal item sebelum diskon)
 - Promo dipakai 41% order; nilai ordernya 6% lebih kecil setelah diskon, tapi nilai sebelum diskon hampir sama
-- 16% order gagal, J&T dan OVO tertinggi (selisih kecil, belum tentu penyebab)
+- 16% order gagal, J&T (18,4%) dan OVO (18,7%) tertinggi, sekitar 4 poin di atas yang terendah (SiCepat dan GoPay 14,2%)
 
 ## Insight dan Rekomendasi
+- **Revenue tumbuh.** Naik dari Rp198,8 juta (2022) ke Rp513,2 juta (2024). Puncak Feb 2025 adalah bulan terakhir di dataset, jadi belum bisa dilihat apakah tren naik berlanjut.
 - **Promo tidak mengubah ukuran keranjang.** Nilai keranjang sebelum diskon hampir sama antara order promo dan non-promo (Rp515.199 vs Rp513.830), jadi selisih 6% pada nilai bersih murni berasal dari diskon. Total diskon Rp31,4 juta (sekitar 2,5% dari revenue). Data ini belum bisa menjawab apakah promo menambah jumlah order; untuk itu perlu pembanding periode sebelum dan sesudah promo atau A/B test. Rekomendasi: ukur dulu efek promo ke jumlah order sebelum memperluasnya.
 - **Kategori hampir seimbang.** Tidak ada satu kategori yang jadi tumpuan revenue. Rekomendasi: fokus bisa ke margin per kategori, bukan volume.
-- **Order gagal 16% adalah masalah terbesar.** Selisih antar kurir dan metode bayar kecil, jadi penyebab kemungkinan bukan di satu kurir atau satu metode. Rekomendasi: telusuri per status (cancelled, returned, dan lainnya) dan per kota sebelum mengganti vendor.
+- **Order gagal 16% adalah masalah terbesar.** J&T dan OVO sekitar 4 poin di atas yang terendah, tapi selisih ini belum diuji secara statistik, jadi belum bisa disimpulkan sebagai penyebab. Rekomendasi: telusuri per status (cancelled dan returned) dan per kota sebelum mengganti vendor atau metode bayar.
 - **Keterbatasan.** Dataset simulasi, jadi pola musiman dan perilaku pelanggan tidak bisa dianggap cerminan bisnis nyata.
 
 ## Visualisasi
