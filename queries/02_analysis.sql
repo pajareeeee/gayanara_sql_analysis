@@ -23,9 +23,11 @@ SELECT shipping_city, COUNT(*) AS jumlah_order, ROUND(SUM(total_amount_idr) / 10
 FROM orders_clean WHERE is_valid_revenue = 1
 GROUP BY shipping_city ORDER BY revenue_juta DESC LIMIT 5;
 
--- 5. Dampak promo (promo dipakai 41% order, nilai ordernya ±6% lebih kecil)
+-- 5. Dampak promo (promo dipakai 41% order; nilai bersih ±6% lebih kecil, nilai sebelum diskon hampir sama)
 SELECT (NULLIF(TRIM(promo_code), '') IS NOT NULL) AS pakai_promo,
-       COUNT(*) AS jumlah_order, ROUND(AVG(total_amount_idr)) AS rata_rata_order
+       COUNT(*) AS jumlah_order,
+       ROUND(AVG(total_amount_idr)) AS rata_rata_net,
+       ROUND(AVG(total_amount_idr + COALESCE(discount_amount_idr, 0))) AS rata_rata_sebelum_diskon
 FROM orders_clean WHERE is_valid_revenue = 1 GROUP BY pakai_promo;
 
 -- 6. Total diskon (Rp31,4 juta)
@@ -39,3 +41,15 @@ FROM orders_clean GROUP BY courier ORDER BY persen_gagal DESC;
 -- 8. Order gagal per metode bayar
 SELECT payment_method, ROUND(100 * AVG(is_valid_revenue = 0), 1) AS persen_gagal
 FROM orders_clean GROUP BY payment_method ORDER BY persen_gagal DESC;
+
+-- 9. Pertumbuhan revenue bulanan (MoM). NULL di bulan pertama karena belum ada bulan sebelumnya.
+WITH bulanan AS (
+  SELECT DATE_FORMAT(order_date_clean, '%Y-%m') AS bulan,
+         SUM(total_amount_idr) AS revenue
+  FROM orders_clean WHERE is_valid_revenue = 1
+  GROUP BY bulan
+)
+SELECT bulan, revenue,
+       ROUND(100 * (revenue - LAG(revenue) OVER (ORDER BY bulan))
+             / LAG(revenue) OVER (ORDER BY bulan), 1) AS mom_persen
+FROM bulanan ORDER BY bulan;
