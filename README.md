@@ -30,6 +30,14 @@ Proyek portofolio data analyst kedua. Dataset yang sama dengan [proyek Python sa
 - **Order gagal 16% adalah masalah terbesar.** Selisih antar kurir dan metode bayar kecil, jadi penyebab kemungkinan bukan di satu kurir atau satu metode. Rekomendasi: telusuri per status (cancelled, returned, dan lainnya) dan per kota sebelum mengganti vendor.
 - **Keterbatasan.** Dataset simulasi, jadi pola musiman dan perilaku pelanggan tidak bisa dianggap cerminan bisnis nyata.
 
+## Visualisasi
+
+![Revenue bulanan](images/revenue_bulanan.png)
+
+![Revenue per kategori](images/revenue_kategori.png)
+
+![Order gagal per kurir](images/order_gagal_kurir.png)
+
 ## Cara Menjalankan
 1. Unduh dataset gratis dari [halaman Ngulik Data](https://ngulikdata.com/datasets/gayanara) (perlu isi nama dan email)
 2. Buat database `gayanara` di MySQL, lalu impor 5 file CSV sebagai tabel: products, customers, orders, order_items, reviews (kolom pertama = nama kolom)
